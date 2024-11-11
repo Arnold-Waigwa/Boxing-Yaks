@@ -1,0 +1,11 @@
+/* Container for the cards */
+.card-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px; /* Space between cards */
+  padding: 20px;
+  width: 1200px;
+  max-width: 1200px;
+  margin: 0 auto; /* Center the container */
+}

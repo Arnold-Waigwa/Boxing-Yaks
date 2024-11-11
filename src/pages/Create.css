@@ -1,0 +1,55 @@
+/* Center the form container and add spacing */
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+/* Style the form inputs */
+.form-container input[type="text"],
+.form-container textarea {
+  width: 100%;
+  padding: 10px 15px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+/* Style the textarea */
+.form-container textarea {
+  min-height: 80px; /* Set a starting height for the textarea */
+  resize: vertical; /* Allow vertical resizing only */
+}
+
+.form-container input[type="text"]:focus,
+.form-container textarea:focus {
+  border-color: #333;
+}
+
+/* Style the button */
+.form-container button {
+  width: 100%;
+  padding: 12px 20px;
+  margin-top: 15px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #333;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.form-container button:hover {
+  background-color: #555;
+}
