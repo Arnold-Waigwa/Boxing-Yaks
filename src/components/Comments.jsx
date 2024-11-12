@@ -1,12 +1,29 @@
 import React, { useEffect, useState } from "react";
 import "./Comments.css";
-import { useParams } from "react-router-dom"; // Import useParams to get the post ID from the URL
 import { supabase } from "../client";
 
-const Comments = () => {
-  const [comments, setComments] = useState([]); // State to hold the list of comments
-  const [newComment, setNewComment] = useState(""); // State to hold the new comment input value
-  const { id: postId } = useParams(); // Get the postId from the URL
+const Comments = ({ postId }) => {
+  const [comments, setComments] = useState([]);
+  const [newComment, setNewComment] = useState("");
+
+  const timeAgo = (timestamp) => {
+    const now = new Date();
+    const postDate = new Date(timestamp);
+    const secondsAgo = Math.floor((now - postDate) / 1000);
+
+    if (secondsAgo < 60) {
+      return `${secondsAgo} seconds ago`;
+    } else if (secondsAgo < 3600) {
+      const minutesAgo = Math.floor(secondsAgo / 60);
+      return `${minutesAgo} minute${minutesAgo > 1 ? "s" : ""} ago`;
+    } else if (secondsAgo < 86400) {
+      const hoursAgo = Math.floor(secondsAgo / 3600);
+      return `${hoursAgo} hour${hoursAgo > 1 ? "s" : ""} ago`;
+    } else {
+      const daysAgo = Math.floor(secondsAgo / 86400);
+      return `${daysAgo} day${daysAgo > 1 ? "s" : ""} ago`;
+    }
+  };
 
   // Fetch the comments related to the specific post
   useEffect(() => {
@@ -46,7 +63,6 @@ const Comments = () => {
         {
           post_id: postId,
           content: newComment,
-          created_at: new Date().toISOString(),
         },
       ]);
 
@@ -70,9 +86,7 @@ const Comments = () => {
         comments.map((comment, index) => (
           <div key={index} className="comment">
             <p className="comment-content">{comment.content}</p>
-            <span className="comment-time">
-              {new Date(comment.created_at).toLocaleString()}
-            </span>
+            <span className="comment-time">{timeAgo(comment.created_at)}</span>
           </div>
         ))
       ) : (

@@ -97,7 +97,7 @@ const Postpage = () => {
         {/* Like Button */}
         <div className="like-button-container">
           <button onClick={handleLike} className="like-button">
-            👍 Like ({data.likes})
+            ❤️ Like ({data.likes})
           </button>
         </div>
       </div>
