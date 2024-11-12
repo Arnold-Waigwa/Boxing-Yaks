@@ -1,5 +1,6 @@
 import React from "react";
 import "./Card.css";
+import { Link } from "react-router-dom";
 
 const Card = ({ id, time, title, upvotes }) => {
   const timeAgo = (timestamp) => {
@@ -25,7 +26,9 @@ const Card = ({ id, time, title, upvotes }) => {
   return (
     <div className="card">
       <p className="card-time">Posted {formattedTime}</p>
-      <h2 className="card-title">{title}</h2>
+      <Link to={`/postpage/${id}`}>
+        <h2 className="card-title">{title}</h2>
+      </Link>
       <p className="card-upvotes">{upvotes} upvotes</p>
     </div>
   );

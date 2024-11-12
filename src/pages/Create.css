@@ -25,10 +25,9 @@
   transition: border-color 0.3s ease;
 }
 
-/* Style the textarea */
 .form-container textarea {
-  min-height: 80px; /* Set a starting height for the textarea */
-  resize: vertical; /* Allow vertical resizing only */
+  min-height: 80px;
+  resize: vertical;
 }
 
 .form-container input[type="text"]:focus,
