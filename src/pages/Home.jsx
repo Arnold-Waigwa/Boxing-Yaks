@@ -16,26 +16,34 @@ const Home = () => {
     }
   };
 
+  //insert uuid to comment page
   useEffect(() => {
     fetchPost();
   }, []);
 
   return (
-    <div className="card-container">
-      {posts && posts.length > 0 ? (
-        posts.map((post) => (
-          <Card
-            key={post.id}
-            id={post.id}
-            title={post.title}
-            time={post.created_at}
-            upvotes={post.upvotes}
-          />
-        ))
-      ) : (
-        <h2>No Posts Yet 😞</h2>
-      )}
-    </div>
+    <>
+      <div className="order-container">
+        <p>Order by:</p>
+        <button>Newest</button>
+        <button>Most Popular</button>
+      </div>
+      <div className="card-container">
+        {posts && posts.length > 0 ? (
+          posts.map((post) => (
+            <Card
+              key={post.id}
+              id={post.id}
+              title={post.title}
+              time={post.created_at}
+              upvotes={post.upvotes}
+            />
+          ))
+        ) : (
+          <h2>No Posts Yet 😞</h2>
+        )}
+      </div>
+    </>
   );
 };
 

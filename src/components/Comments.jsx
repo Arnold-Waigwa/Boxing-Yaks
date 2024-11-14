@@ -6,6 +6,7 @@ const Comments = ({ postId }) => {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
 
+  // Utility function to display "time ago" format
   const timeAgo = (timestamp) => {
     const now = new Date();
     const postDate = new Date(timestamp);
@@ -32,14 +33,14 @@ const Comments = ({ postId }) => {
         const { data, error } = await supabase
           .from("Comments")
           .select("*")
-          .eq("post_id", postId);
-
+          .eq("post_id", postId)
+          .order("created_at", { descending: true });
         if (error) {
           throw error;
         }
 
         if (data) {
-          setComments(data); // Set the comments in state
+          setComments(data);
         }
       } catch (error) {
         console.error("Error fetching comments:", error.message);
@@ -47,14 +48,12 @@ const Comments = ({ postId }) => {
     };
 
     fetchComments();
-  }, [postId]); // Dependency array to ensure it runs when postId changes
+  }, [postId]);
 
-  // Handle adding a new comment
   const handleAddComment = async (e) => {
     e.preventDefault();
 
     if (newComment.trim() === "") {
-      // Prevent adding empty comments
       return;
     }
 
@@ -63,6 +62,7 @@ const Comments = ({ postId }) => {
         {
           post_id: postId,
           content: newComment,
+          created_at: new Date().toISOString(),
         },
       ]);
 
@@ -71,8 +71,8 @@ const Comments = ({ postId }) => {
       }
 
       if (data) {
-        setComments((prevComments) => [...prevComments, data[0]]); // Add the new comment to the state
-        setNewComment(""); // Clear the input field
+        setComments((prevComments) => [...prevComments, data[0]]);
+        setNewComment("");
       }
     } catch (error) {
       console.error("Error adding comment:", error.message);
@@ -83,8 +83,8 @@ const Comments = ({ postId }) => {
     <div className="comments-container">
       <h3>Comments</h3>
       {comments.length > 0 ? (
-        comments.map((comment, index) => (
-          <div key={index} className="comment">
+        comments.map((comment) => (
+          <div key={comment.id} className="comment">
             <p className="comment-content">{comment.content}</p>
             <span className="comment-time">{timeAgo(comment.created_at)}</span>
           </div>
@@ -93,7 +93,6 @@ const Comments = ({ postId }) => {
         <p>No comments yet. Be the first to comment!</p>
       )}
 
-      {/* Add Comment Form */}
       <form onSubmit={handleAddComment} className="comment-form">
         <input
           type="text"

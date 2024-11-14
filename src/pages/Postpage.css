@@ -117,3 +117,13 @@ body {
   color: #888;
   margin-bottom: 20px;
 }
+
+.button-link {
+  background: none;
+  border: none;
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: inherit;
+  padding: 5;
+}

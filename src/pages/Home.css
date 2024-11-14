@@ -9,3 +9,11 @@
   max-width: 1200px;
   margin: 0 auto; /* Center the container */
 }
+
+body {
+  background-color: black;
+}
+
+.order-container button {
+  margin: 5px;
+}

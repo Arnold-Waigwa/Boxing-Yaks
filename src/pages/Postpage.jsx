@@ -3,6 +3,7 @@ import "./Postpage.css";
 import Comments from "../components/Comments";
 import { useParams } from "react-router-dom";
 import { supabase } from "../client";
+import { Link } from "react-router-dom";
 
 const Postpage = () => {
   const { id } = useParams();
@@ -61,6 +62,7 @@ const Postpage = () => {
 
     fetchData();
   }, [id]);
+  //fetch data again, sorted to most likes this time, when user clicks the order by: most popular
 
   // Handle Like Button Click
   const handleLike = async () => {
@@ -86,6 +88,14 @@ const Postpage = () => {
     }
   };
 
+  const handleDelete = async (event) => {
+    event.preventDefault();
+
+    await supabase.from("Posts").delete().eq("id", id);
+
+    window.location = "/";
+  };
+
   return (
     <div>
       <div className="post-container">
@@ -96,8 +106,14 @@ const Postpage = () => {
 
         {/* Like Button */}
         <div className="like-button-container">
+          <button className="button-link">
+            <Link to={`/Edit/${id}`}>Update</Link>
+          </button>
           <button onClick={handleLike} className="like-button">
-            ❤️ Like ({data.likes})
+            👍 Like ({data.likes})
+          </button>
+          <button className="button-link" onClick={handleDelete}>
+            Delete
           </button>
         </div>
       </div>
