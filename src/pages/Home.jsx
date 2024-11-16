@@ -3,10 +3,10 @@ import "./Home.css";
 import { supabase } from "../client";
 import Card from "../components/Card";
 
-const Home = () => {
+const Home = ({ searchTerm }) => {
   const [posts, setPosts] = useState([]);
   const [orderBy, setOrderBy] = useState("created_at");
-  const [isLoading, setIsLoading] = useState(false); // Loading state
+  const [isLoading, setIsLoading] = useState(false);
 
   // Function to change sort to "created_at" (newest first)
   const handleNewest = () => {
@@ -22,10 +22,17 @@ const Home = () => {
   const fetchPost = async () => {
     setIsLoading(true);
     try {
-      const { data, error } = await supabase
+      let query = supabase
         .from("Posts")
         .select()
         .order(orderBy, { ascending: false });
+
+      if (searchTerm) {
+        query = query.ilike("title", `%${searchTerm}%`);
+      }
+
+      const { data, error } = await query;
+
       if (error) throw error;
       setPosts(data);
     } catch (error) {
@@ -38,7 +45,7 @@ const Home = () => {
   // Fetch posts whenever "orderBy" changes
   useEffect(() => {
     fetchPost();
-  }, [orderBy]);
+  }, [orderBy, searchTerm]);
 
   return (
     <>

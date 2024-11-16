@@ -2,11 +2,20 @@ import React from "react";
 import "./Navbar.css";
 import { Link } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({ searchTerm, setSearchTerm }) => {
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
   return (
     <div className="navbar">
       <h2>BoxingYak</h2>
-      <input className="search-bar" type="text" placeholder="Search" />
+      <input
+        className="search-bar"
+        type="text"
+        value={searchTerm}
+        placeholder="Search Title"
+        onChange={handleSearchChange}
+      />
       <nav>
         <ul>
           <li>
