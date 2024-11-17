@@ -1,19 +1,73 @@
-/* Container for the cards */
 .card-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px; /* Space between cards */
-  padding: 20px;
-  width: 1200px;
+  gap: 15px;
   max-width: 1200px;
-  margin: 0 auto; /* Center the container */
+  margin: 0 auto;
 }
 
+/* Global Styles */
 body {
   background-color: black;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+/* Order by Buttons */
+.order-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+  margin-top: 10px;
 }
 
 .order-container button {
   margin: 5px;
+  padding: 8px 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #1f1f1f;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease-out, transform 0.3s ease-out;
+}
+
+.order-container button:hover {
+  background-color: grey;
+  transform: scale(
+    1.05
+  ); 
+}
+
+.order-container button.active {
+  background-color: #555; 
+  color: #fff;
+}
+
+.card {
+  background-color: #2a2a2a;
+  color: white;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  width: 90%;
+  max-width: 800px;
+  transition: transform 0.2s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+
+.nav-search .search-input {
+  padding: 8px;
+  width: 60%;
+  max-width: 400px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  outline: none;
 }

@@ -42,7 +42,7 @@ const Home = ({ searchTerm }) => {
     }
   };
 
-  // Fetch posts whenever "orderBy" changes
+  // Fetch posts whenever "orderBy" and "searchterm" changes
   useEffect(() => {
     fetchPost();
   }, [orderBy, searchTerm]);
